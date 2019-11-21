@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 12:27:12 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/14 17:44:05 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/11/20 15:58:39 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int		gather_prec2(char *str, int i, t_conv *tools)
 	{
 		PREC = ft_atoi(&str[i]);
 		i = ft_len_of_pw(str, i, tools);
+		PW_EXIST = 1;
 	}
 	return (i);
 }

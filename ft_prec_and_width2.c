@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 16:16:10 by kbaker            #+#    #+#             */
-/*   Updated: 2019/07/13 20:43:26 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/11/19 18:36:08 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ints_prec(t_conv *tools, t_convone *toolsone)
 		NEG = 0;
 		RETLEN++;
 	}
+	//if (LEN != 1)
 	PREC = PREC - LEN;
 	while (PREC > 0)
 	{

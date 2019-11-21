@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 20:30:33 by kbaker            #+#    #+#             */
-/*   Updated: 2019/07/12 23:34:54 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/11/20 15:59:34 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int		ft_len_of_pw(char *str, int i, t_conv *tools)
 	}
 	if (str[i] == '0')
 		i++;
-	i += len;
+	if (ft_isdigit(str[i]))
+		i += len;
 	return (i);
 }
 

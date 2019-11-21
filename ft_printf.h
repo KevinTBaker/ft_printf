@@ -85,7 +85,7 @@ typedef struct		s_conv
 	int 		prec;
 	int 		len;
 	int		uninbr;
-	int		nbr;
+	intmax_t	nbr;
 	//uintmax_t	unbr;
 	int		neg;
 	int		flag;
@@ -169,6 +169,9 @@ void 			minus_width(char *s1, t_conv *tools, t_convone *toolsone);
 void 			minus_prec_width(char *s1, t_conv *tools, t_convone *toolsone);
 void	ft_minus_string_p_and_w(char *s1, char *s2, t_conv *tools, t_convone *toolsone);
 void	ft_minus_string_w(char *s1, t_conv *tools, t_convone *toolsone);
-char	*ft_uitoa_base3(unsigned int value, int base);
+char	*ft_itoa_base2(int value, int base);
+char	*ft_uitoa_base3(size_t value, int base);
+char	*ft_itoa_base3(intmax_t value, int base);
+//char	*ft_itoa_base(intmax_t value, int base);
 //char	*ft_uitoa_base3(uintmax_t n, char const *base);
 #endif

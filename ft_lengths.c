@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 19:29:01 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/15 19:53:49 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/11/21 14:49:19 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	ft_deci_lengths_done(t_conv *tools, va_list vl)
 	else if (SINGLEL == 1)
 		NBR = (long int)va_arg(vl, intmax_t);
 	else if (DOUBLEL == 1)
-		NBR = (long long int)va_arg(vl, int);
+		NBR = (long long)va_arg(vl, intmax_t);
+	else
+		NBR = va_arg(vl, int);
 }
 
 void	ft_octals_hex(t_conv *tools, va_list vl)
@@ -31,9 +33,11 @@ void	ft_octals_hex(t_conv *tools, va_list vl)
 	else if (SINGLEH == 1)
 		NBR = (unsigned short int)va_arg(vl, uintmax_t);
 	else if (SINGLEL == 1)
-		NBR = (unsigned long int)va_arg(vl, uintmax_t);
+		NBR = va_arg(vl, long);
 	else if (DOUBLEL == 1)
-		NBR = (unsigned long long int)va_arg(vl, uintmax_t);
+		NBR = va_arg(vl, long long);
+	else 
+		NBR = va_arg(vl, unsigned int);
 }
 
 void	ft_unsigned_len(t_conv *tools, va_list vl)
@@ -43,7 +47,7 @@ void	ft_unsigned_len(t_conv *tools, va_list vl)
 	if (SINGLEL == 1)
 		NBR = (unsigned long int)va_arg(vl, uintmax_t);
 	if (DOUBLEL == 1)
-		NBR = (unsigned long long int)va_arg(vl, unsigned int);
+		NBR = (unsigned long long int)va_arg(vl, uintmax_t);
 }
 
 void	ft_floats_ls(t_conv *tools, va_list vl)

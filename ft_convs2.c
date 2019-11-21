@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 17:39:32 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/15 17:03:09 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/11/20 17:44:15 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,32 @@ int		lowercase_hex_done(t_conv *tools, t_convone *toolsone, va_list vl)
 {
 	char	*s1;
 
-	if (LENGTHS == 1)
-		ft_octals_hex(tools, vl);
-	else
-		NBR = va_arg(vl, uintmax_t);
-	s1 = ft_itoa_base(NBR, 16);
+	ft_octals_hex(tools, vl);
+	s1 = ft_uitoa_base3(NBR, 16);
 	NNBR = ft_atoi(s1);
-	ft_turn_to_lowercase(s1);
-	LEN = ft_strlen(s1);
-	//if (MINUS == 1 && HASH == 1)
-	//	ft_minus_hash(s1, tools, toolsone);
-	if (MINUS == 1)
-		ft_minus_hash(s1, tools, toolsone);
-	//ft_putstr(s1);
-	ft_doing(tools, toolsone);
+	if (((PREC == 0 && NBR == 0) && PW_EXIST == 1) || (PREC == 1 && NBR == 0))
+	{
+		ft_strclr(s1);
+		s1 = NULL;
+		PREC = 0;
+		LEN = 0;
+		if (WIDTH != 0)
+			ints_prec_or_width(tools, toolsone);
+	}
+	else 
+	{
+		ft_turn_to_lowercase(s1);
+		LEN = ft_strlen(s1);
+		if (MINUS == 1)
+			ft_minus_hash(s1, tools, toolsone);
+		ft_doing(tools, toolsone);
+		if (UNBR != 1)
+			ft_putstr(s1);
+	}
 	if (RETLEN != 0)
 		RETLEN = LEN + RETLEN;
 	else
 		RETLEN = LEN;
-	if (UNBR != 1)
-		ft_putstr(s1);
 	ft_bzero(tools, sizeof(t_conv));
 	return (RETLEN);
 }
@@ -52,6 +58,10 @@ int		unsigned_done(t_conv *tools, t_convone *toolsone, va_list vl)
 		NBR = va_arg(vl, unsigned int);
 	s1 = ft_uitoa_base3(NBR, 10);
 	LEN = ft_strlen(s1);
+	if (PLUS == 1)
+		PLUS = 0;
+	if (SPACE == 1)
+		SPACE = 0;
 	if (MINUS == 1)
 		ft_minus_and_plus(s1, tools, toolsone);
 	ft_doing(tools, toolsone);
