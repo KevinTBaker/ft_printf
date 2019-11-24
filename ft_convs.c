@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:50:34 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/21 14:34:19 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/11/23 16:37:39 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		integers_done(t_conv *tools, t_convone *toolsone, va_list vl)
 	else
 		s1 = ft_itoa_base2(NBR, 10);
 	NNBR = ft_atoi(s1);
-	if (((PREC == 0 && NBR == 0) && PW_EXIST == 1) || (PREC == 1 && NBR == 0))
+	if ((((PREC == 0 && NBR == 0) && PW_EXIST == 1) || (PREC == 1 && NBR == 0)) && (FLAG == 0))
 	{
 		s1 = ft_strnew(1);
 		s1 = "0";
@@ -98,17 +98,36 @@ int		strings_done(t_conv *tools, t_convone *toolsone,  va_list vl)
 	char	*s2;
 
 	s1 = va_arg(vl, char*);
+	s2 = NULL;
 	if (s1 == NULL)
 	{
-		ft_putstr("(null)");
+		//ft_putstr("(null)");
 		s1 = "(null)";
 		LEN = ft_strlen(s1);
+		if (PERIPREC == 1)
+			LEN = PREC;
+		//if (WIDTH != 0)
+		//	main_width_and_prec(tools, toolsone);
+		if (MINUS == 1)
+			ft_minus_string_p_and_w(s1, s2, tools, toolsone);
+		if (CONVS == 1)
+			ft_doing(tools, toolsone);
+		if (UNBR != 1)
+		{
+			s2 = ft_memalloc(LEN + 1);
+			ft_strncpy(s2, s1, LEN);
+			s2[LEN + 1] = '\0';
+		}
+		if (UNBR != 1 && PERIPREC != 1)
+			ft_putstr(s2);
 	}
 	//s2 = NULL;
 	else
 	{
 		s2 = NULL;
 		LEN = ft_strlen(s1);
+		if (PERIPREC == 1)
+			LEN = PREC;
 		if (MINUS == 1)
 			ft_minus_string_p_and_w(s1, s2, tools, toolsone);
 		if (CONVS == 1)

@@ -55,6 +55,7 @@
 #define	STRING tools->string
 #define MNBR tools->mnbr
 #define ZLEN tools->zlen
+#define PERIPREC tools->periprec
 
 typedef struct		s_conv
 {
@@ -101,6 +102,7 @@ typedef struct		s_conv
 	int		wplus;
 	int		mnbr;
 	int		zlen;
+	int		periprec;
 }			t_conv;
 
 typedef struct		s_convone
@@ -112,7 +114,7 @@ typedef struct		s_convone
 int			parser(char *str, t_conv *tools, t_convone *toolsone, int i);
 void    		ft_doing(t_conv *tools, t_convone *toolsone);
 int			ft_printf(const char *format, ...);
-int			gather_flags(char *str, int i, t_conv *tools);
+int			gather_flags(char *str, int i, t_conv *tools, t_convone *toolsone);
 int			gather_prec(char *str, int i, t_conv *tools);
 int			gather_length(char *str, int i, t_conv *tools);
 int     		gather_strings_character(char *str, int i, t_conv *tools);

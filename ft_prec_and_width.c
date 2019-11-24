@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 16:42:30 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/20 16:41:11 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/11/23 15:56:19 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,17 @@ void	strings_width_and_prec(t_conv *tools, t_convone *toolsone)
 			LEN = PREC;
 			PREC = 0;
 		}
+		if (PREC == WIDTH)
+		{
+			//PREC = PREC - LEN;
+			while (PREC > LEN)
+			{
+				write(1, " ", 1);
+				PREC--;
+			}
+			WIDTH = 0;
+			//PREC = 0;
+		}
 			//PREC = PREC - LEN;
 			//LEN = PREC;
 		//if (PREC > LEN)
@@ -97,17 +108,26 @@ void	strings_width_and_prec(t_conv *tools, t_convone *toolsone)
 		//	WIDTH = WIDTH - PREC;
 		//if (PREC > 0)
 		//	LEN = PREC;
+		//change back to PREC
 		while (WIDTH > PREC)
 		{
 			write(1, " ", 1);
 			WIDTH--;
 			RETLEN++;
 		}
+		//get rid if broken
+		if (!(WIDTH < PREC))
+		{
+			while (PREC > LEN)
+			{
+				write(1, " ", 1);
+				PREC--;
+				RETLEN++;
+			}
+		}
 		if (LEN != 0)
 			LEN = PREC;
 		PREC = 0;
-		//if (LEN == 0 && PREC > LEN)
-		//	LEN = PREC;
 	}
 	else if (WIDTH)
 	{
@@ -120,6 +140,9 @@ void	strings_width_and_prec(t_conv *tools, t_convone *toolsone)
 	}
 	else if (PREC && LEN != 0)
 		LEN = PREC;
+	else if ((PREC == 0 && PW_EXIST == 1) && (UNBR == 0))
+		LEN = PREC;
+	//take out PW_EXIST == 1 && MINUS
 }
 
 void	main_width_and_prec(t_conv *tools, t_convone *toolsone)

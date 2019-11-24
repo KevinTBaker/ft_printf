@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 19:12:27 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/15 15:44:02 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/11/22 17:31:05 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		parser(char *str, t_conv *tools, t_convone *toolsone, int i)
 			//RETLEN++;
 			i++;
 		}
-		i = gather_flags(str, i, tools);
+		i = gather_flags(str, i, tools, toolsone);
 		i = gather_prec(str, i, tools);
 		i = gather_length(str, i, tools);
 		i = gather_convs(str, i, tools);
