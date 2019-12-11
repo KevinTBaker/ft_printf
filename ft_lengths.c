@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 19:29:01 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/21 14:49:19 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/10 17:46:38 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,21 @@ void	ft_octals_hex(t_conv *tools, va_list vl)
 	else if (DOUBLEL == 1)
 		NBR = va_arg(vl, long long);
 	else 
-		NBR = va_arg(vl, unsigned int);
+		NBR = va_arg(vl, uintmax_t);
 }
 
 void	ft_unsigned_len(t_conv *tools, va_list vl)
 {
 	if (DOUBLEH == 1)
 		NBR = (unsigned char)va_arg(vl, unsigned int);
-	if (SINGLEL == 1)
+	else if (SINGLEH == 1)
+		NBR = (short int)va_arg(vl, uintmax_t);
+	else if (SINGLEL == 1)
 		NBR = (unsigned long int)va_arg(vl, uintmax_t);
-	if (DOUBLEL == 1)
+	else if (DOUBLEL == 1)
 		NBR = (unsigned long long int)va_arg(vl, uintmax_t);
+	else
+		NBR = va_arg(vl, unsigned int);
 }
 
 void	ft_floats_ls(t_conv *tools, va_list vl)

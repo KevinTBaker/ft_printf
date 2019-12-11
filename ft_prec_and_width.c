@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 16:42:30 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/23 15:56:19 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/10 09:35:22 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ints_width_and_precision(t_conv *tools, t_convone *toolsone)
 		WPLUS = 1;
 		if (NEG == 1)
 		{
-			write(1, "-", 1);
-			NEG = 0;
+			//write(1, "-", 1);
+			//NEG = 0;
 			RETLEN++;
 			WIDTH--;
 		}
@@ -40,6 +40,11 @@ void	ints_width_and_precision(t_conv *tools, t_convone *toolsone)
 			write(1, " ", 1);
 			RETLEN++;
 			WIDTH--;
+		}
+		if (NEG == 1)
+		{
+			ft_putchar('-');
+			NEG = 0;
 		}
 		/*
 		WIDTH = WIDTH - LEN;
@@ -65,14 +70,23 @@ void	ints_prec_or_width(t_conv *tools, t_convone *toolsone)
 		WIDTH = WIDTH - LEN;
 		while (WIDTH > 0)
 		{
+			//if (ZERO == 1)
+			//	write(1, "0", 1);
+			//else
 			write(1, " ", 1);
 			WIDTH--;
 			RETLEN++;
 		}
 		if (PLUS == 1)
+		{
 			ft_putchar('+');
+			PLUS = 0;
+		}
 		if (NEG == 1)
+		{
 			ft_putchar('-');
+			NEG = 0;
+		}
 		WPLUS = 1;
 	}
 	else if (PREC)

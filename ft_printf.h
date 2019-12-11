@@ -6,56 +6,56 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
-#define FLAGS(x) (x == '#' || x == ' ' || x == '0' || x == '+' || x == '-')
-#define CONV(x) (ft_strchr(CONVERSIONS, x))
-#define CONVERSIONS "sSpidDoOuUxXcC"
-#define CONVERT tools->convert
-#define MINUS tools->minus
-#define SPACE tools->space
-#define ZERO tools->zero
-#define PLUS tools->plus
-#define WIDTH tools->width
-#define HASH tools->hash
-#define PREC tools->prec
-#define SINGLEH tools->single_h
-#define DOUBLEH tools->double_h
-#define BIGL tools->big_l
-#define SINGLEL tools->single_l
-#define DOUBLEL tools->double_l
-#define LILS tools->lil_s
-#define LILP tools->lil_p
-#define LILI tools->lil_i
-#define LILD tools->lil_d
-#define LILO tools->lil_o
-#define LILU tools->lil_u
-#define LILX tools->lil_x
-#define LILF tools->lil_f
-#define BIGX tools->big_x
-#define LILC tools->lil_c
-#define FLAG tools->flag
-#define LEN tools->len
-#define PERC tools->percent
-#define CONVCHAR tools->convchar
-#define UNINBR tools->uninbr
-#define FNBR tools->fnbr
-#define NEG tools->neg
-#define FLAG tools->flag
-#define PW_EXIST tools->pw_exist
-#define	LENGTHS	tools->lengths
-#define CONVS tools->convs
-#define NBR tools->nbr
-#define UNBR toolsone->unbr
-#define NNBR tools->nnbr
-#define F	tools->f
-#define RLEN tools->rlen
-#define DHASH tools->dhash
-#define WPLUS tools->wplus
-#define RETLEN	toolsone->retlen
-#define D_PERC tools->dperc
-#define	STRING tools->string
-#define MNBR tools->mnbr
-#define ZLEN tools->zlen
-#define PERIPREC tools->periprec
+# define FLAGS(x) (x == '#' || x == ' ' || x == '0' || x == '+' || x == '-')
+# define CONV(x) (ft_strchr(CONVERSIONS, x))
+# define CONVERSIONS "sSpidDoOuUxXcC"
+# define CONVERT tools->convert
+# define MINUS tools->minus
+# define SPACE tools->space
+# define ZERO tools->zero
+# define PLUS tools->plus
+# define WIDTH tools->width
+# define HASH tools->hash
+# define PREC tools->prec
+# define SINGLEH tools->single_h
+# define DOUBLEH tools->double_h
+# define BIGL tools->big_l
+# define SINGLEL tools->single_l
+# define DOUBLEL tools->double_l
+# define LILS tools->lil_s
+# define LILP tools->lil_p
+# define LILI tools->lil_i
+# define LILD tools->lil_d
+# define LILO tools->lil_o
+# define LILU tools->lil_u
+# define LILX tools->lil_x
+# define LILF tools->lil_f
+# define BIGX tools->big_x
+# define LILC tools->lil_c
+# define FLAG tools->flag
+# define LEN tools->len
+# define PERC tools->percent
+# define CONVCHAR tools->convchar
+# define UNINBR tools->uninbr
+# define FNBR tools->fnbr
+# define NEG tools->neg
+# define FLAG tools->flag
+# define PW_EXIST tools->pw_exist
+# define	LENGTHS	tools->lengths
+# define CONVS tools->convs
+# define NBR tools->nbr
+# define UNBR toolsone->unbr
+# define NNBR tools->nnbr
+# define F	tools->f
+# define RLEN tools->rlen
+# define DHASH tools->dhash
+# define WPLUS tools->wplus
+# define RETLEN	toolsone->retlen
+# define D_PERC tools->dperc
+# define	STRING tools->string
+# define MNBR tools->mnbr
+# define ZLEN tools->zlen
+# define PERIPREC tools->periprec
 
 typedef struct		s_conv
 {
@@ -136,7 +136,7 @@ int			uppercase_hex_done(t_conv *tools, t_convone *toolsone, va_list vl);
 int			pointers_done(t_conv *tools, t_convone *toolsone, va_list vl);
 int			floats_done(t_conv *tools, t_convone *toolsone, va_list vl);
 void			zeroing_convs(t_conv *tools);
-int			ft_turn_to_positive(t_conv *tools);
+intmax_t		ft_turn_to_positive(t_conv *tools);
 void			precision_and_width_get_it(t_conv *tools, t_convone *toolsone);
 void			ints_width_and_precision(t_conv *tools, t_convone *toolsone);
 void			ints_width_or_precision(t_conv *tools);

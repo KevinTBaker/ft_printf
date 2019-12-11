@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 12:27:12 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/23 16:43:08 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/08 15:34:58 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		gather_flags(char *str, int i, t_conv *tools, t_convone *toolsone)
 		FLAG = 1;
 	if (MINUS == 0)
 		UNBR = 0;
+	if (SPACE == 1 && PLUS == 1)
+		SPACE = 0;
 	return (i);
 }
 
@@ -65,15 +67,28 @@ int		gather_width1(char *str, int i, t_conv *tools)
 	WIDTH = ft_atoi(&str[i]);
 	if (str[i + 1] && str[i + 1] == '.')
 	{
+		if (ft_isdigit(str[i + 2]))
+			PREC = ft_atoi(&str[i + 2]);
+		else
+		{
+			PERIPREC = 1;
+			PREC = 0;
+		}
+		if (PREC == 0)
+			PERIPREC = 1;
 		i += 2;
-		//takeout ft_is_digit and else if it not work
+		//takeout PERIPREC
+		/*
 		if (ft_isdigit(str[i]))
 			PREC = ft_atoi(&str[i]);
+		*/
+		/*
 		else
 		{
 			PREC = 0;
 			PERIPREC = 1;
 		}
+		*/
 	}
 	i = ft_len_of_pw(str, i, tools);
 	return (i);
@@ -92,6 +107,9 @@ int		gather_prec2(char *str, int i, t_conv *tools)
 			PREC = ft_atoi(&str[i]);
 			i = ft_len_of_pw(str, i, tools);
 		}
+		//takeout if statement
+		if (PREC == 0)
+			PERIPREC = 1;
 		PW_EXIST = 1;
 	}
 	else

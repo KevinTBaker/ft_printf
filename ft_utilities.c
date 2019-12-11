@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 20:30:33 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/20 15:59:34 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/09 15:39:34 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,16 @@ void	zeroing_convs(t_conv *tools)
 	LILC = 0;
 }
 
-int		ft_turn_to_positive(t_conv *tools)
+intmax_t		ft_turn_to_positive(t_conv *tools)
 {
+	//change periprec back to prec
+	//if (NBR < 0)
+	//	NEG = 1;
+	if (MINUS == 1 && SPACE == 1)
+	{
+		if (NBR < 0)
+			SPACE = 0;
+	}
 	if ((!WIDTH && !PREC) || (MINUS == 1 && PREC == 0))
 		return (NBR);
 	if (NBR < 0)

@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 19:12:27 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/22 17:31:05 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/06 11:58:43 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,11 @@ int		ft_printf(const char *format, ...)
 	t_convone	toolsone;
 	va_list		vl;
 	int			i;
-	//int			nlen;
 
-	//make i in struct so you don't need to pass it all the time
 	va_start(vl, format);
 	i = 0;
 	ft_bzero(&tools, sizeof(t_conv));
 	ft_bzero(&toolsone, sizeof(t_convone));
-	//if (format[i] == NULL)
-	//	return (NULL);
 	while (format[i])
 	{
 		i = parser((char *)format, &tools, &toolsone, i);
@@ -77,17 +73,6 @@ int		ft_printf(const char *format, ...)
 			toolsone.retlen = double_perc_done(&tools, &toolsone);
 		if (format[i] != '\0')
 			i++;
-		/*
-		if (tools.percent != 1)
-		{
-			while (format[i] != '\0')
-			{
-				write(1, &format[i], 1);
-				i++;
-			}
-		}
-		*/
 	}
-	//printf("%d\n", toolsone.retlen);
 	return (toolsone.retlen);
 }

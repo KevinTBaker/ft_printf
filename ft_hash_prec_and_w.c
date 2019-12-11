@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 11:18:18 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/20 19:57:26 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/10 10:39:09 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void	hash_width_and_prec(t_conv *tools, t_convone *toolsone)
 
 void	lilo_hash_width_and_prec(t_conv *tools, t_convone *toolsone)
 {
+	if (((WIDTH == 0 && PREC == 0) && (PERIPREC == 0)))
+	{
+		write(1, "0", 1);
+		HASH = 0;
+	}
 	if (WIDTH != 0 && PREC != 0)
 	{
 		LEN++;
@@ -78,6 +83,7 @@ void	lilo_hash_width_and_prec(t_conv *tools, t_convone *toolsone)
 			PREC = LEN;
 		main_width_and_prec(tools, toolsone);
 		write(1, "0", 1);
+		HASH = 0;
 		RETLEN++;
 	}
 	if (WIDTH && !PREC)
@@ -86,6 +92,7 @@ void	lilo_hash_width_and_prec(t_conv *tools, t_convone *toolsone)
 		main_width_and_prec(tools, toolsone);
 		write(1, "0", 1);
 		RETLEN++;
+		HASH = 0;
 	}
 	if (!WIDTH && PREC)
 	{

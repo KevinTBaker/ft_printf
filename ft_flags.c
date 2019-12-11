@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:03:00 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/19 20:45:58 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/10 10:59:15 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	hash_flag_done(t_conv *tools, t_convone *toolsone)
 {
-	if (HASH == 1)
+	if (HASH == 1 && NBR != 0)
 	{
 		if (LILO == 1)
 			lilo_hash_width_and_prec(tools, toolsone);
@@ -74,7 +74,7 @@ void	plus_and_space_flag_done(t_conv *tools, t_convone *toolsone)
 	}
 	else if (SPACE == 1 && D_PERC == 0)
 	{
-		if (NBR >= 0)
+		if ((NBR >= 0 && UNBR == 0) && NEG == 0)
 		{
 			if (PREC && !WIDTH)
 			{
@@ -84,6 +84,12 @@ void	plus_and_space_flag_done(t_conv *tools, t_convone *toolsone)
 			if (!PREC && !WIDTH)
 			{
 				ft_putchar(' ');
+				RETLEN++;
+			}
+			if (!PREC && WIDTH)
+			{
+				ft_putchar(' ');
+				WIDTH--;
 				RETLEN++;
 			}
 			main_width_and_prec(tools, toolsone);
