@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 11:18:18 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/10 10:39:09 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/13 19:16:34 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,10 @@ void	hash_width(t_conv *tools, t_convone *toolsone)
 	if (LILO == 1)
 		WIDTH--;
 	if (ZERO == 1)
-	{
-		write(1, "0x", 2);
-		RETLEN += 2;
-		while (WIDTH > LEN)
-		{
-			write(1, "0", 1);
-			WIDTH--;
-			RETLEN++;
-		}
-		ZERO = 0;
-		HASH = 0;
-		//NNBR = 1;
-	}
+		ft_hash_width_zero_flag(tools, toolsone);
 	if (MINUS == 1)
 	{
-		//make a function for this
 		write(1, "0x", 2);
-		//put str
 		RETLEN += 2;
 		HASH = 0;
 	}
@@ -94,11 +80,7 @@ void	lilo_hash_width_and_prec(t_conv *tools, t_convone *toolsone)
 		RETLEN++;
 		HASH = 0;
 	}
-	if (!WIDTH && PREC)
-	{
-		write(1, "0", 1);
-		LEN++;
-	}
+	lilo_no_width_hash_prec(tools);
 }
 
 void	lilx_hash_width_prec(t_conv *tools, t_convone *toolsone)
@@ -110,18 +92,11 @@ void	lilx_hash_width_prec(t_conv *tools, t_convone *toolsone)
 	if (WIDTH != 0 && PREC != 0)
 		hash_width_and_prec(tools, toolsone);
 	if (NNBR != 0 && ZERO != 0)
-	{
 		write(1, "0x", 2);
-		//if (!PW_EXIST)
-		//	RETLEN += 2;
-	}
 	if ((WIDTH == 0 && PREC == 0) && (HASH == 1))
 	{
-		if (NNBR != 0)
-		{
-			write(1, "0x", 2);
-			RETLEN += 2;
-		}
+		write(1, "0x", 2);
+		RETLEN += 2;
 	}
 }
 
@@ -131,9 +106,8 @@ void	bigx_hash_width_prec(t_conv *tools, t_convone *toolsone)
 		LEN += 2;
 	if (WIDTH && !PREC)
 		hash_width(tools, toolsone);
-	if (WIDTH != 0 && PREC != 0) 
+	if (WIDTH != 0 && PREC != 0)
 		hash_width_and_prec(tools, toolsone);
 	write(1, "0X", 2);
-	//if (!WIDTH && PREC)
 	RETLEN += 2;
 }

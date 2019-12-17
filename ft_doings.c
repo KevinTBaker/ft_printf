@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 12:47:06 by kbaker            #+#    #+#             */
-/*   Updated: 2019/07/13 22:58:00 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/12 16:53:59 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		convs_get_done(t_conv *tools, t_convone *toolsone, va_list vl)
 	else if (LILU == 1)
 		RETLEN = unsigned_done(tools, toolsone, vl);
 	else if (BIGX == 1)
-	 	RETLEN = uppercase_hex_done(tools, toolsone, vl);
+		RETLEN = uppercase_hex_done(tools, toolsone, vl);
 	else if (LILP == 1)
 		RETLEN = pointers_done(tools, toolsone, vl);
 	else if (LILX == 1)

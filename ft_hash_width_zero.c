@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_double_perc.c                                   :+:      :+:    :+:   */
+/*   ft_hash_width_zero.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 16:48:56 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/12 16:51:44 by kbaker           ###   ########.fr       */
+/*   Created: 2019/12/13 16:41:01 by kbaker            #+#    #+#             */
+/*   Updated: 2019/12/13 17:07:34 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		gather_doubleperc(char *str, int i, t_conv *tools)
+void	ft_hash_width_zero_flag(t_conv *tools, t_convone *toolsone)
 {
-	if (str[i] == '%')
-		D_PERC = 1;
-	PERC = 0;
-	return (i);
-}
-
-int		double_perc_done(t_conv *tools, t_convone *toolsone)
-{
-	char c;
-
-	c = '%';
-	LEN = 1;
-	if (MINUS == 1)
-		ft_putchar(c);
-	ft_doing(tools, toolsone);
-	if (RETLEN != 0)
-		RETLEN = LEN + RETLEN;
-	else
-		RETLEN = LEN;
-	if (UNBR != 1)
-		ft_putchar(c);
-	ft_bzero(tools, sizeof(t_conv));
-	return (RETLEN);
+	write(1, "0x", 2);
+	RETLEN += 2;
+	while (WIDTH > LEN)
+	{
+		write(1, "0", 1);
+		WIDTH--;
+		RETLEN++;
+	}
+	ZERO = 0;
+	HASH = 0;
 }

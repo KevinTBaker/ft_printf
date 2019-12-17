@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 16:42:30 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/10 09:35:22 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/16 20:08:03 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,11 @@ void	ints_width_and_precision(t_conv *tools, t_convone *toolsone)
 	if (PREC && WIDTH)
 	{
 		WPLUS = 1;
-		if (NEG == 1)
-		{
-			//write(1, "-", 1);
-			//NEG = 0;
-			RETLEN++;
-			WIDTH--;
-		}
-		if (PLUS == 1)
-		{
-			WIDTH--;
-			RETLEN++;
-		}
+		if_neg_or_plus(tools, toolsone);
 		if (PREC == 1 || PREC == LEN)
 			PREC = LEN;
-		//PREC = LEN;
 		if (LEN > PREC)
 			PREC = LEN;
-		//PREC = 0;
 		while (WIDTH > PREC && UNBR != 1)
 		{
 			write(1, " ", 1);
@@ -46,15 +33,6 @@ void	ints_width_and_precision(t_conv *tools, t_convone *toolsone)
 			ft_putchar('-');
 			NEG = 0;
 		}
-		/*
-		WIDTH = WIDTH - LEN;
-		while (WIDTH > 0)
-		{
-			write(1, " ", 1);
-			WIDTH--;
-			RETLEN++;
-		}
-		*/
 		ints_width_and_precision2(tools, toolsone);
 	}
 }
@@ -65,29 +43,20 @@ void	ints_prec_or_width(t_conv *tools, t_convone *toolsone)
 	{
 		if (PLUS == 1 || NEG == 1)
 			LEN++;
-		//if (NEG == 1)
-		//	LEN++;
 		WIDTH = WIDTH - LEN;
 		while (WIDTH > 0)
 		{
-			//if (ZERO == 1)
-			//	write(1, "0", 1);
-			//else
-			write(1, " ", 1);
+			if (ZERO == 1)
+			{
+				write(1, "0", 1);
+				ZERO = 0;
+			}
+			else
+				write(1, " ", 1);
 			WIDTH--;
 			RETLEN++;
 		}
-		if (PLUS == 1)
-		{
-			ft_putchar('+');
-			PLUS = 0;
-		}
-		if (NEG == 1)
-		{
-			ft_putchar('-');
-			NEG = 0;
-		}
-		WPLUS = 1;
+		if_plus_or_neg(tools);
 	}
 	else if (PREC)
 		ints_prec(tools, toolsone);
@@ -97,39 +66,7 @@ void	strings_width_and_prec(t_conv *tools, t_convone *toolsone)
 {
 	if (WIDTH && PREC)
 	{
-		if (LEN == 0 && PREC > LEN)
-		{
-			LEN = PREC;
-			PREC = 0;
-		}
-		if (PREC == WIDTH)
-		{
-			//PREC = PREC - LEN;
-			while (PREC > LEN)
-			{
-				write(1, " ", 1);
-				PREC--;
-			}
-			WIDTH = 0;
-			//PREC = 0;
-		}
-			//PREC = PREC - LEN;
-			//LEN = PREC;
-		//if (PREC > LEN)
-		//	LEN = PREC;
-			//PREC = PREC - LEN;
-		//if (LEN != 0)
-		//	WIDTH = WIDTH - PREC;
-		//if (PREC > 0)
-		//	LEN = PREC;
-		//change back to PREC
-		while (WIDTH > PREC)
-		{
-			write(1, " ", 1);
-			WIDTH--;
-			RETLEN++;
-		}
-		//get rid if broken
+		width_and_prec_if(tools, toolsone);
 		if (!(WIDTH < PREC))
 		{
 			while (PREC > LEN)
@@ -144,19 +81,11 @@ void	strings_width_and_prec(t_conv *tools, t_convone *toolsone)
 		PREC = 0;
 	}
 	else if (WIDTH)
-	{
-		while (WIDTH > LEN)
-		{
-			write(1, " ", 1);
-			WIDTH--;
-			RETLEN++;
-		}
-	}
+		width_and_prec_else_if(tools, toolsone);
 	else if (PREC && LEN != 0)
 		LEN = PREC;
 	else if ((PREC == 0 && PW_EXIST == 1) && (UNBR == 0))
 		LEN = PREC;
-	//take out PW_EXIST == 1 && MINUS
 }
 
 void	main_width_and_prec(t_conv *tools, t_convone *toolsone)

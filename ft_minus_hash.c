@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_minus_hash.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/13 18:35:36 by kbaker            #+#    #+#             */
+/*   Updated: 2019/12/16 18:48:26 by kbaker           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_minus_hash(char *s1, t_conv *tools, t_convone *toolsone)
@@ -21,29 +33,10 @@ void	ft_minus_hash(char *s1, t_conv *tools, t_convone *toolsone)
 
 void	minus_width(char *s1, t_conv *tools, t_convone *toolsone)
 {
-	//ft_putstr(s1);
 	if (HASH == 1)
-	{
-		write(1, "0", 1);
-		if (LILX == 1)
-		{
-			write(1, "x", 1);
-			WIDTH--;
-			RETLEN++;
-		}
-		else if (BIGX == 1)
-		{
-			write(1, "X", 1);
-			WIDTH--;
-			RETLEN++;
-		}
-		WIDTH--;
-		HASH = 0;
-		RETLEN++;
-	}
+		minus_width_hash(tools, toolsone);
 	if (SPACE == 1)
 	{
-		//take out if back to NBR > 0
 		if (NEG == 0)
 		{
 			write(1, " ", 1);
@@ -51,14 +44,10 @@ void	minus_width(char *s1, t_conv *tools, t_convone *toolsone)
 		}
 		SPACE = 0;
 	}
-	//if ((NBR != 0 && PREC != 0) && (PERIPREC != 1) && (LILO != 1))
-	//if (LILO != 1)
-	//if ((PW_EXIST != 1 && PREC != 0) && (PERIPREC != 1 && NBR != 0) && LILO != 1)
 	if ((PERIPREC != 1 && NBR != 0))
 		ft_putstr(s1);
 	else if ((NBR == 0 && PREC == 0) && PERIPREC != 1)
 		ft_putstr(s1);
-	//else
 	while (WIDTH > LEN)
 	{
 		write(1, " ", 1);
@@ -67,7 +56,6 @@ void	minus_width(char *s1, t_conv *tools, t_convone *toolsone)
 	}
 	WIDTH = 0;
 	UNBR = 1;
-	//SPACE = 0;
 }
 
 void	minus_prec_width(char *s1, t_conv *tools, t_convone *toolsone)
@@ -77,32 +65,7 @@ void	minus_prec_width(char *s1, t_conv *tools, t_convone *toolsone)
 	else if (LEN > PREC)
 		PREC = 0;
 	WIDTH = WIDTH - PREC;
-	if (NEG == 1 && PREC == 0)
-	{
-		ft_putchar('-');
-		NEG = 0;
-		LEN++;
-		//if (SPACE == 1)
-		//	SPACE = 0;
-	}
-	if (SPACE == 1)
-	{
-		ft_putchar(' ');
-		WIDTH--;
-		SPACE = 0;
-	}
-	while (PREC > 0)
-	{
-		if (NEG == 1)
-		{
-			ft_putchar('-');
-			NEG = 0;
-			LEN++;
-		}
-		write(1, "0", 1);
-		PREC--;
-		RETLEN++;
-	}
+	minus_prec_width_space_neg(tools, toolsone);
 	PREC = 0;
 	ft_putstr(s1);
 	WIDTH = WIDTH - LEN;
@@ -115,6 +78,7 @@ void	minus_prec_width(char *s1, t_conv *tools, t_convone *toolsone)
 	WIDTH = 0;
 	UNBR = 1;
 }
+
 void	ft_minus_and_plus(char *s1, t_conv *tools, t_convone *toolsone)
 {
 	if (PLUS == 1)
@@ -125,25 +89,13 @@ void	ft_minus_and_plus(char *s1, t_conv *tools, t_convone *toolsone)
 			WIDTH--;
 			RETLEN++;
 		}
-		/*
-		else
-		{
-			ft_putchar('-');
-			NEG = 0;
-			//LEN++;
-		}
-		*/
 		PLUS = 0;
 		if (!(WIDTH > PREC))
 			UNBR = 0;
 	}
-	if ((PREC != 0 && WIDTH != 0) && (WIDTH > PREC)) 
+	if ((PREC != 0 && WIDTH != 0) && (WIDTH > PREC))
 		minus_prec_width(s1, tools, toolsone);
 	if (!PREC && WIDTH)
 		minus_width(s1, tools, toolsone);
-	//if (PREC && !WIDTH)
-	//	minus_prec(s1, tools, toolsone);
-	//ints_width_and_precision(tools, toolsone);
-	//main_width_and_prec(tools, toolsone);
 	MINUS = 0;
 }

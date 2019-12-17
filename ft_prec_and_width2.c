@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 16:16:10 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/19 18:36:08 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/16 17:08:50 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ints_width_and_precision2(t_conv *tools, t_convone *toolsone)
 		ft_putchar(' ');
 		RETLEN++;
 	}
-	//if (UNBR != 1)
 	WIDTH = 0;
 	PREC = PREC - LEN;
 	while (PREC > 0)
@@ -41,7 +40,6 @@ void	ints_prec(t_conv *tools, t_convone *toolsone)
 		NEG = 0;
 		RETLEN++;
 	}
-	//if (LEN != 1)
 	PREC = PREC - LEN;
 	while (PREC > 0)
 	{

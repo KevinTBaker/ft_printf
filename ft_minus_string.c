@@ -6,35 +6,17 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:07:14 by kbaker            #+#    #+#             */
-/*   Updated: 2019/11/23 16:48:29 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/16 16:41:00 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_minus_string_p_and_w(char *s1, char *s2, t_conv *tools, t_convone *toolsone)
+void	ft_minus_string_p_and_w(char *s1, char *s2,
+		t_conv *tools, t_convone *toolsone)
 {
 	if ((MINUS == 1) && (PREC != 0 && WIDTH != 0))
 	{
-		
-		/*
-		if (PREC > LEN)
-			PREC = PREC - LEN;
-		*/
-		/*
-		if (LEN != 0)
-		{
-			//back to LEN
-			//WIDTH = WIDTH - LEN;
-			//LEN = 0;
-		}
-		if (PREC > 0 && PREC < LEN)
-		{
-			if (LEN == 0)
-				ZLEN = 1;
-			LEN = PREC;
-		}
-		*/
 		if (PREC < LEN)
 			LEN = PREC;
 		WIDTH = WIDTH - LEN;
@@ -63,7 +45,6 @@ void	ft_minus_string_w(char *s1, t_conv *tools, t_convone *toolsone)
 		UNBR = 1;
 		MNBR = 1;
 		WIDTH = WIDTH - LEN;
-		//LEN = 0;
 	}
 	while (WIDTH > 0)
 	{
@@ -71,6 +52,5 @@ void	ft_minus_string_w(char *s1, t_conv *tools, t_convone *toolsone)
 		WIDTH--;
 		RETLEN++;
 	}
-	//LEN = 0;
 	WIDTH = 0;
 }

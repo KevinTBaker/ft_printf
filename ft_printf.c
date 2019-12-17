@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 19:12:27 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/06 11:58:43 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/16 17:08:33 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int		parser(char *str, t_conv *tools, t_convone *toolsone, int i)
 	if (PERC != 1)
 	{
 		ft_putchar(str[i]);
-		//i++;
-		//if (i != 0 && str[i] != '\n')
 		RETLEN++;
 	}
 	else
@@ -33,8 +31,6 @@ int		parser(char *str, t_conv *tools, t_convone *toolsone, int i)
 		{
 			D_PERC = 1;
 			PERC = 0;
-			//RETLEN++;
-			i++;
 		}
 		i = gather_flags(str, i, tools, toolsone);
 		i = gather_prec(str, i, tools);
@@ -68,7 +64,7 @@ int		ft_printf(const char *format, ...)
 	{
 		i = parser((char *)format, &tools, &toolsone, i);
 		if (tools.convs == 1)
-			convs_get_done(&tools, &toolsone,  vl);
+			convs_get_done(&tools, &toolsone, vl);
 		else if (tools.dperc == 1)
 			toolsone.retlen = double_perc_done(&tools, &toolsone);
 		if (format[i] != '\0')

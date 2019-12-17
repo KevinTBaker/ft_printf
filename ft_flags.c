@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:03:00 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/10 10:59:15 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/12 17:57:08 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	zero_flag_done(t_conv *tools, t_convone *toolsone)
 	if (NEG == 1)
 	{
 		write(1, "-", 1);
-		//check this len
 		if (WIDTH != 0)
 			LEN++;
 		NEG = 0;
@@ -53,49 +52,9 @@ void	zero_flag_done(t_conv *tools, t_convone *toolsone)
 void	plus_and_space_flag_done(t_conv *tools, t_convone *toolsone)
 {
 	if (PLUS == 1)
-	{
-		if (NBR >= 0 && NEG == 0)
-		{
-			if ((PREC && !WIDTH) || (!PREC &&!WIDTH))
-			{
-				ft_putchar('+');
-				RETLEN++;
-			}
-			else if (ZERO == 1) 
-			{
-				ft_putchar('+');
-				WIDTH--;
-				RETLEN++;
-				zero_flag_done(tools, toolsone);
-			}
-			main_width_and_prec(tools, toolsone);
-		}
-		PLUS = 0;
-	}
+		plus_and_space_if_nbr_is_positive(tools, toolsone);
 	else if (SPACE == 1 && D_PERC == 0)
-	{
-		if ((NBR >= 0 && UNBR == 0) && NEG == 0)
-		{
-			if (PREC && !WIDTH)
-			{
-				ft_putchar(' ');
-				RETLEN++;
-			}
-			if (!PREC && !WIDTH)
-			{
-				ft_putchar(' ');
-				RETLEN++;
-			}
-			if (!PREC && WIDTH)
-			{
-				ft_putchar(' ');
-				WIDTH--;
-				RETLEN++;
-			}
-			main_width_and_prec(tools, toolsone);
-		}
-		SPACE = 0;
-	}
+		space_if_nbr_is_positive(tools, toolsone);
 	PERC = 0;
 }
 

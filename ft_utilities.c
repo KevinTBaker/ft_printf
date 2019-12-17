@@ -6,13 +6,13 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 20:30:33 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/09 15:39:34 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/16 19:35:47 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	zeroing_convs(t_conv *tools)
+void		zeroing_convs(t_conv *tools)
 {
 	PERC = 0;
 	LILD = 0;
@@ -27,11 +27,8 @@ void	zeroing_convs(t_conv *tools)
 	LILC = 0;
 }
 
-intmax_t		ft_turn_to_positive(t_conv *tools)
+intmax_t	ft_turn_to_positive(t_conv *tools)
 {
-	//change periprec back to prec
-	//if (NBR < 0)
-	//	NEG = 1;
 	if (MINUS == 1 && SPACE == 1)
 	{
 		if (NBR < 0)
@@ -44,7 +41,7 @@ intmax_t		ft_turn_to_positive(t_conv *tools)
 	return (NBR * -1);
 }
 
-int		ft_len_of_pw(char *str, int i, t_conv *tools)
+int			ft_len_of_pw(char *str, int i, t_conv *tools)
 {
 	int		n;
 	int		len;
@@ -61,14 +58,7 @@ int		ft_len_of_pw(char *str, int i, t_conv *tools)
 		}
 	}
 	else if (PREC)
-	{
-		n = PREC;
-		while (n != 0)
-		{
-			n = n / 10;
-			len++;
-		}
-	}
+		len = else_if_prec(tools, n, len);
 	if (str[i] == '0')
 		i++;
 	if (ft_isdigit(str[i]))
@@ -76,7 +66,15 @@ int		ft_len_of_pw(char *str, int i, t_conv *tools)
 	return (i);
 }
 
-char	ft_turn_to_lowercase(char *s1)
+int			absolute(int n)
+{
+	if (n < 0)
+		return (n * -1);
+	else
+		return (n);
+}
+
+char		ft_turn_to_lowercase(char *s1)
 {
 	int	i;
 
