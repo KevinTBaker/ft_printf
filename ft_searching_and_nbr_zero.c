@@ -22,89 +22,89 @@ int		flag_search(char c)
 
 void	plus_and_space_if_nbr_is_positive(t_conv *tools, t_convone *toolsone)
 {
-	if (NBR >= 0 && NEG == 0)
+	if (tools->nbr >= 0 && tools->neg == 0)
 	{
-		if ((PREC && !WIDTH) || (!PREC && !WIDTH))
+		if ((tools->prec && !tools->width) || (!tools->prec && !tools->width))
 		{
 			ft_putchar('+');
-			RETLEN++;
+			toolsone->retlen++;
 		}
-		else if (ZERO == 1)
+		else if (tools->zero == 1)
 		{
 			ft_putchar('+');
-			WIDTH--;
-			RETLEN++;
+			tools->width--;
+			toolsone->retlen++;
 			zero_flag_done(tools, toolsone);
 		}
 		main_width_and_prec(tools, toolsone);
 	}
-	PLUS = 0;
+	tools->plus = 0;
 }
 
 void	space_if_nbr_is_positive(t_conv *tools, t_convone *toolsone)
 {
-	if ((NBR >= 0 && UNBR == 0) && NEG == 0)
+	if ((tools->nbr >= 0 && toolsone->unbr == 0) && tools->neg == 0)
 	{
-		if (PREC && !WIDTH)
+		if (tools->prec && !tools->width)
 		{
 			ft_putchar(' ');
-			RETLEN++;
+			toolsone->retlen++;
 		}
-		if (!PREC && !WIDTH)
+		if (!tools->prec && !tools->width)
 		{
 			ft_putchar(' ');
-			RETLEN++;
+			toolsone->retlen++;
 		}
-		if (!PREC && WIDTH)
+		if (!tools->prec && tools->width)
 		{
 			ft_putchar(' ');
-			WIDTH--;
-			RETLEN++;
+			tools->width--;
+			toolsone->retlen++;
 		}
 		main_width_and_prec(tools, toolsone);
 	}
-	SPACE = 0;
+	tools->space = 0;
 }
 
 void	ft_nbr_and_prec_is_zero(char *s1, t_conv *tools, t_convone *toolsone)
 {
 	s1 = ft_strnew(1);
 	s1 = "0";
-	PREC = 0;
-	LEN = ft_strlen(s1);
-	if (PERIPREC == 1)
-		LEN = PREC;
-	if (WIDTH != 0)
+	tools->prec = 0;
+	tools->len = ft_strlen(s1);
+	if (tools->periprec == 1)
+		tools->len = tools->prec;
+	if (tools->width != 0)
 		ints_prec_or_width(tools, toolsone);
-	if (PERIPREC != 1)
+	if (tools->periprec != 1)
 		ft_putstr(s1);
 }
 
 void	ft_nbr_and_prec_else(char *s1, t_conv *tools, t_convone *toolsone)
 {
-	LEN = ft_strlen(s1);
-	if ((PREC == 0 && NBR == 0) && PW_EXIST == 1)
+	tools->len = ft_strlen(s1);
+	if ((tools->prec == 0 && tools->nbr == 0) && tools->pw_exist == 1)
 	{
 		s1 = ft_strnew(1);
 		s1 = "0";
-		PREC = 0;
-		LEN = ft_strlen(s1);
-		if (PERIPREC == 1)
+		tools->prec = 0;
+		tools->len = ft_strlen(s1);
+		if (tools->periprec == 1)
 		{
-			UNBR = 1;
-			if (PLUS == 1 && MINUS == 1)
+			toolsone->unbr = 1;
+			if (tools->plus == 1 && tools->minus == 1)
 			{
-				PLUS = 0;
+				tools->plus = 0;
 				ft_putchar('+');
-				WIDTH--;
+				tools->width--;
 			}
-			LEN = PREC;
-			MINUS = 0;
+			tools->len = tools->prec;
+			tools->minus = 0;
 		}
 	}
-	if (MINUS == 1 && PERIPREC == 0)
+	if (tools->minus == 1 && tools->periprec == 0)
 		ft_minus_and_plus(s1, tools, toolsone);
 	ft_doing(tools, toolsone);
-	if (UNBR != 1)
+	if (toolsone->unbr != 1)
 		ft_putstr(s1);
 }

@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:07:14 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/16 16:41:00 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/17 20:01:30 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,42 @@
 void	ft_minus_string_p_and_w(char *s1, char *s2,
 		t_conv *tools, t_convone *toolsone)
 {
-	if ((MINUS == 1) && (PREC != 0 && WIDTH != 0))
+	if ((tools->minus == 1) && (tools->prec != 0 && tools->width != 0))
 	{
-		if (PREC < LEN)
-			LEN = PREC;
-		WIDTH = WIDTH - LEN;
-		PREC = 0;
-		MNBR = 1;
-		UNBR = 1;
-		s2 = ft_memalloc(LEN + 1);
-		ft_strncpy(s2, s1, LEN);
-		s2[LEN + 1] = '\0';
-		if (PERIPREC != 1)
+		if (tools->prec < tools->len)
+			tools->len = tools->prec;
+		tools->width = tools->width - tools->len;
+		tools->prec = 0;
+		tools->mnbr = 1;
+		toolsone->unbr = 1;
+		s2 = ft_memalloc(tools->len + 1);
+		ft_strncpy(s2, s1, tools->len);
+		s2[tools->len + 1] = '\0';
+		if (tools->periprec != 1)
 			ft_putstr(s2);
-		if (ZLEN == 1)
-			LEN = 0;
-		MINUS = 0;
+		if (tools->zlen == 1)
+			tools->len = 0;
+		tools->minus = 0;
 	}
-	if (WIDTH != 0)
+	if (tools->width != 0)
 		ft_minus_string_w(s1, tools, toolsone);
 }
 
 void	ft_minus_string_w(char *s1, t_conv *tools, t_convone *toolsone)
 {
-	if (UNBR != 1 || MNBR != 1)
+	if (toolsone->unbr != 1 || tools->mnbr != 1)
 	{
-		if (PERIPREC != 1)
+		if (tools->periprec != 1)
 			ft_putstr(s1);
-		UNBR = 1;
-		MNBR = 1;
-		WIDTH = WIDTH - LEN;
+		toolsone->unbr = 1;
+		tools->mnbr = 1;
+		tools->width = tools->width - tools->len;
 	}
-	while (WIDTH > 0)
+	while (tools->width > 0)
 	{
 		write(1, " ", 1);
-		WIDTH--;
-		RETLEN++;
+		tools->width--;
+		toolsone->retlen++;
 	}
-	WIDTH = 0;
+	tools->width = 0;
 }

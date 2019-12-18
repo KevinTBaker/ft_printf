@@ -14,88 +14,88 @@
 
 void	ft_minus_hash(char *s1, t_conv *tools, t_convone *toolsone)
 {
-	if (LILO == 1 && HASH == 1)
+	if (tools->lil_o == 1 && tools->hash == 1)
 	{
 		write(1, "0", 1);
-		LEN++;
+		tools->len++;
 	}
-	else if (LILX == 1 && HASH == 1)
+	else if (tools->lil_x == 1 && tools->hash == 1)
 	{
 		write(1, "0x", 2);
-		LEN += 2;
+		tools->len += 2;
 	}
 	ft_putstr(s1);
-	FLAG = 0;
-	MINUS = 0;
-	HASH = 0;
-	UNBR = 1;
+	tools->flag = 0;
+	tools->minus = 0;
+	tools->hash = 0;
+	toolsone->unbr = 1;
 }
 
 void	minus_width(char *s1, t_conv *tools, t_convone *toolsone)
 {
-	if (HASH == 1)
+	if (tools->hash == 1)
 		minus_width_hash(tools, toolsone);
-	if (SPACE == 1)
+	if (tools->space == 1)
 	{
-		if (NEG == 0)
+		if (tools->neg == 0)
 		{
 			write(1, " ", 1);
-			WIDTH--;
+			tools->width--;
 		}
-		SPACE = 0;
+		tools->space = 0;
 	}
-	if ((PERIPREC != 1 && NBR != 0))
+	if ((tools->periprec != 1 && tools->nbr != 0))
 		ft_putstr(s1);
-	else if ((NBR == 0 && PREC == 0) && PERIPREC != 1)
+	else if ((tools->nbr == 0 && tools->prec == 0) && tools->periprec != 1)
 		ft_putstr(s1);
-	while (WIDTH > LEN)
+	while (tools->width > tools->len)
 	{
 		write(1, " ", 1);
-		WIDTH--;
-		RETLEN++;
+		tools->width--;
+		toolsone->retlen++;
 	}
-	WIDTH = 0;
-	UNBR = 1;
+	tools->width = 0;
+	toolsone->unbr = 1;
 }
 
 void	minus_prec_width(char *s1, t_conv *tools, t_convone *toolsone)
 {
-	if (!(PREC < LEN))
-		PREC = PREC - LEN;
-	else if (LEN > PREC)
-		PREC = 0;
-	WIDTH = WIDTH - PREC;
+	if (!(tools->prec < tools->len))
+		tools->prec = tools->prec - tools->len;
+	else if (tools->len > tools->prec)
+		tools->prec = 0;
+	tools->width = tools->width - tools->prec;
 	minus_prec_width_space_neg(tools, toolsone);
-	PREC = 0;
+	tools->prec = 0;
 	ft_putstr(s1);
-	WIDTH = WIDTH - LEN;
-	while (WIDTH > 0)
+	tools->width = tools->width - tools->len;
+	while (tools->width > 0)
 	{
 		write(1, " ", 1);
-		WIDTH--;
-		RETLEN++;
+		tools->width--;
+		toolsone->retlen++;
 	}
-	WIDTH = 0;
-	UNBR = 1;
+	tools->width = 0;
+	toolsone->unbr = 1;
 }
 
 void	ft_minus_and_plus(char *s1, t_conv *tools, t_convone *toolsone)
 {
-	if (PLUS == 1)
+	if (tools->plus == 1)
 	{
-		if (NBR >= 0 && NEG == 0)
+		if (tools->nbr >= 0 && tools->neg == 0)
 		{
 			ft_putchar('+');
-			WIDTH--;
-			RETLEN++;
+			tools->width--;
+			toolsone->retlen++;
 		}
-		PLUS = 0;
-		if (!(WIDTH > PREC))
-			UNBR = 0;
+		tools->plus = 0;
+		if (!(tools->width > tools->prec))
+			toolsone->unbr = 0;
 	}
-	if ((PREC != 0 && WIDTH != 0) && (WIDTH > PREC))
+	if ((tools->prec != 0 && tools->width != 0) && (tools->width > tools->prec))
 		minus_prec_width(s1, tools, toolsone);
-	if (!PREC && WIDTH)
+	if (!tools->prec && tools->width)
 		minus_width(s1, tools, toolsone);
-	MINUS = 0;
+	tools->minus = 0;
 }

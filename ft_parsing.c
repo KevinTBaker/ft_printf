@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 12:27:12 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/12 14:29:48 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/17 20:03:31 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,42 @@ int		gather_flags(char *str, int i, t_conv *tools, t_convone *toolsone)
 {
 	while (str[i] && flag_search(str[i]))
 	{
-		if (!HASH && str[i] == '#')
-			HASH = 1;
-		else if (!PLUS && str[i] == '+')
-			PLUS = 1;
-		else if (!SPACE && str[i] == ' ')
-			SPACE = 1;
-		else if (!ZERO && str[i] == '0' && !MINUS)
-			ZERO = 1;
-		else if (!MINUS && str[i] == '-')
-			MINUS = 1;
+		if (!tools->hash && str[i] == '#')
+			tools->hash = 1;
+		else if (!tools->plus && str[i] == '+')
+			tools->plus = 1;
+		else if (!tools->space && str[i] == ' ')
+			tools->space = 1;
+		else if (!tools->zero && str[i] == '0' && !tools->minus)
+			tools->zero = 1;
+		else if (!tools->minus && str[i] == '-')
+			tools->minus = 1;
 		i++;
 	}
-	if (HASH == 1 || PLUS == 1 || SPACE == 1 || ZERO == 1 || MINUS == 1)
-		FLAG = 1;
-	if (MINUS == 0)
-		UNBR = 0;
-	if (SPACE == 1 && PLUS == 1)
-		SPACE = 0;
+	if (tools->hash == 1 || tools->plus == 1 ||
+			tools->space == 1 || tools->zero == 1 || tools->minus == 1)
+		tools->flag = 1;
+	if (tools->minus == 0)
+		toolsone->unbr = 0;
+	if (tools->space == 1 && tools->plus == 1)
+		tools->space = 0;
 	return (i);
 }
 
 int		gather_width1(char *str, int i, t_conv *tools)
 {
-	WIDTH = ft_atoi(&str[i]);
+	tools->width = ft_atoi(&str[i]);
 	if (str[i + 1] && str[i + 1] == '.')
 	{
 		if (ft_isdigit(str[i + 2]))
-			PREC = ft_atoi(&str[i + 2]);
+			tools->prec = ft_atoi(&str[i + 2]);
 		else
 		{
-			PERIPREC = 1;
-			PREC = 0;
+			tools->periprec = 1;
+			tools->prec = 0;
 		}
-		if (PREC == 0)
-			PERIPREC = 1;
+		if (tools->prec == 0)
+			tools->periprec = 1;
 		i += 2;
 	}
 	i = ft_len_of_pw(str, i, tools);
@@ -59,26 +60,26 @@ int		gather_width1(char *str, int i, t_conv *tools)
 
 int		gather_prec2(char *str, int i, t_conv *tools)
 {
-	PREC = 1;
+	tools->prec = 1;
 	i++;
 	if (ft_isdigit(str[i]))
 	{
-		PREC = ft_atoi(&str[i]);
+		tools->prec = ft_atoi(&str[i]);
 		i = ft_len_of_pw(str, i, tools);
 		if (ft_isdigit(str[i]))
 		{
-			PREC = ft_atoi(&str[i]);
+			tools->prec = ft_atoi(&str[i]);
 			i = ft_len_of_pw(str, i, tools);
 		}
-		if (PREC == 0)
-			PERIPREC = 1;
-		PW_EXIST = 1;
+		if (tools->prec == 0)
+			tools->periprec = 1;
+		tools->pw_exist = 1;
 	}
 	else
 	{
-		PREC = 0;
-		PW_EXIST = 1;
-		PERIPREC = 1;
+		tools->prec = 0;
+		tools->pw_exist = 1;
+		tools->periprec = 1;
 	}
 	return (i);
 }
@@ -92,29 +93,29 @@ int		gather_prec(char *str, int i, t_conv *tools)
 		if (str[i] == '.')
 			i = gather_prec2(str, i, tools);
 	}
-	if ((PREC || WIDTH) || (PREC && WIDTH))
-		PW_EXIST = 1;
+	if ((tools->prec || tools->width) || (tools->prec && tools->width))
+		tools->pw_exist = 1;
 	return (i);
 }
 
 int		gather_length(char *str, int i, t_conv *tools)
 {
 	if (str[i] == 'h' && str[i + 1] == 'h')
-		DOUBLEH = 1;
+		tools->double_h = 1;
 	else if (str[i] == 'h')
-		SINGLEH = 1;
+		tools->single_h = 1;
 	else if (str[i] == 'l' && str[i + 1] == 'l')
-		DOUBLEL = 1;
+		tools->double_l = 1;
 	else if (str[i] == 'l')
-		SINGLEL = 1;
+		tools->single_l = 1;
 	else if (str[i] == 'L')
-		BIGL = 1;
-	if (DOUBLEH == 1 || SINGLEH == 1 || DOUBLEL == 1 ||
-			SINGLEL == 1 || BIGL == 1)
-		LENGTHS = 1;
-	if (DOUBLEH == 1 || DOUBLEL == 1)
+		tools->big_l = 1;
+	if (tools->double_h == 1 || tools->single_h == 1 || tools->double_l == 1 ||
+			tools->single_l == 1 || tools->big_l == 1)
+		tools->lengths = 1;
+	if (tools->double_h == 1 || tools->double_l == 1)
 		i += 2;
-	else if (SINGLEH == 1 || SINGLEL == 1 || BIGL == 1)
+	else if (tools->single_h == 1 || tools->single_l == 1 || tools->big_l == 1)
 		i += 1;
 	return (i);
 }

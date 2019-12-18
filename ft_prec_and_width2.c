@@ -14,52 +14,52 @@
 
 void	ints_width_and_precision2(t_conv *tools, t_convone *toolsone)
 {
-	if (PLUS == 1)
+	if (tools->plus == 1)
 		ft_putchar('+');
-	if ((SPACE == 1) && (WIDTH < PREC))
+	if ((tools->space == 1) && (tools->width < tools->prec))
 	{
 		ft_putchar(' ');
-		RETLEN++;
+		toolsone->retlen++;
 	}
-	WIDTH = 0;
-	PREC = PREC - LEN;
-	while (PREC > 0)
+	tools->width = 0;
+	tools->prec = tools->prec - tools->len;
+	while (tools->prec > 0)
 	{
 		write(1, "0", 1);
-		PREC--;
-		RETLEN++;
+		tools->prec--;
+		toolsone->retlen++;
 	}
-	PREC = 0;
+	tools->prec = 0;
 }
 
 void	ints_prec(t_conv *tools, t_convone *toolsone)
 {
-	if (NEG == 1)
+	if (tools->neg == 1)
 	{
 		write(1, "-", 1);
-		NEG = 0;
-		RETLEN++;
+		tools->neg = 0;
+		toolsone->retlen++;
 	}
-	PREC = PREC - LEN;
-	while (PREC > 0)
+	tools->prec = tools->prec - tools->len;
+	while (tools->prec > 0)
 	{
 		write(1, "0", 1);
-		PREC--;
-		RETLEN++;
+		tools->prec--;
+		toolsone->retlen++;
 	}
 }
 
 void	char_width(t_conv *tools, t_convone *toolsone)
 {
-	if (WIDTH)
+	if (tools->width)
 	{
-		WIDTH = WIDTH - LEN;
-		while (WIDTH > 0)
+		tools->width = tools->width - tools->len;
+		while (tools->width > 0)
 		{
 			write(1, " ", 1);
-			WIDTH--;
-			RETLEN++;
+			tools->width--;
+			toolsone->retlen++;
 		}
-		WIDTH = 0;
+		tools->width = 0;
 	}
 }

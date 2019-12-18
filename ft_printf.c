@@ -15,22 +15,22 @@
 
 int		parser(char *str, t_conv *tools, t_convone *toolsone, int i)
 {
-	if (str[i] == '%' && PERC == 0)
+	if (str[i] == '%' && tools->percent == 0)
 	{
-		PERC = 1;
+		tools->percent = 1;
 		i++;
 	}
-	if (PERC != 1)
+	if (tools->percent != 1)
 	{
 		ft_putchar(str[i]);
-		RETLEN++;
+		toolsone->retlen++;
 	}
 	else
 	{
 		if (str[i] == '%')
 		{
-			D_PERC = 1;
-			PERC = 0;
+			tools->dperc = 1;
+			tools->percent = 0;
 		}
 		i = gather_flags(str, i, tools, toolsone);
 		i = gather_prec(str, i, tools);
@@ -43,9 +43,9 @@ int		parser(char *str, t_conv *tools, t_convone *toolsone, int i)
 
 void	ft_doing(t_conv *tools, t_convone *toolsone)
 {
-	if (FLAG == 1)
+	if (tools->flag == 1)
 		flags_get_done(tools, toolsone);
-	if (PW_EXIST == 1)
+	if (tools->pw_exist == 1)
 		precision_and_width_get_it(tools, toolsone);
 }
 

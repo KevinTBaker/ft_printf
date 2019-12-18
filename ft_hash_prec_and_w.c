@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 11:18:18 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/13 19:16:34 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/17 16:50:37 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,100 +14,100 @@
 
 void	hash_width(t_conv *tools, t_convone *toolsone)
 {
-	if (LILO == 1)
-		WIDTH--;
-	if (ZERO == 1)
+	if (tools->lil_o == 1)
+		tools->width--;
+	if (tools->zero == 1)
 		ft_hash_width_zero_flag(tools, toolsone);
-	if (MINUS == 1)
+	if (tools->minus == 1)
 	{
 		write(1, "0x", 2);
-		RETLEN += 2;
-		HASH = 0;
+		toolsone->retlen += 2;
+		tools->hash = 0;
 	}
-	while (WIDTH > LEN && ZERO == 0)
+	while (tools->width > tools->len && tools->zero == 0)
 	{
 		write(1, " ", 1);
-		WIDTH--;
-		RETLEN++;
+		tools->width--;
+		toolsone->retlen++;
 	}
-	WIDTH = 0;
+	tools->width = 0;
 }
 
 void	hash_width_and_prec(t_conv *tools, t_convone *toolsone)
 {
-	if (LILX || BIGX)
-		WIDTH -= 2;
-	if (PREC == 1)
-		PREC = LEN;
-	if (LILO)
-		WIDTH--;
-	while (WIDTH > PREC)
+	if (tools->lil_x || tools->big_x)
+		tools->width -= 2;
+	if (tools->prec == 1)
+		tools->prec = tools->len;
+	if (tools->lil_o)
+		tools->width--;
+	while (tools->width > tools->prec)
 	{
 		write(1, " ", 1);
-		RETLEN++;
-		WIDTH--;
+		toolsone->retlen++;
+		tools->width--;
 	}
-	WIDTH = 0;
-	if (LILO)
+	tools->width = 0;
+	if (tools->lil_o)
 	{
 		write(1, "0", 1);
-		RETLEN++;
+		toolsone->retlen++;
 	}
 }
 
 void	lilo_hash_width_and_prec(t_conv *tools, t_convone *toolsone)
 {
-	if (((WIDTH == 0 && PREC == 0) && (PERIPREC == 0)))
+	if (((tools->width == 0 && tools->prec == 0) && (tools->periprec == 0)))
 	{
 		write(1, "0", 1);
-		HASH = 0;
+		tools->hash = 0;
 	}
-	if (WIDTH != 0 && PREC != 0)
+	if (tools->width != 0 && tools->prec != 0)
 	{
-		LEN++;
-		if (PREC < LEN)
-			PREC = LEN;
+		tools->len++;
+		if (tools->prec < tools->len)
+			tools->prec = tools->len;
 		main_width_and_prec(tools, toolsone);
 		write(1, "0", 1);
-		HASH = 0;
-		RETLEN++;
+		tools->hash = 0;
+		toolsone->retlen++;
 	}
-	if (WIDTH && !PREC)
+	if (tools->width && !tools->prec)
 	{
-		WIDTH--;
+		tools->width--;
 		main_width_and_prec(tools, toolsone);
 		write(1, "0", 1);
-		RETLEN++;
-		HASH = 0;
+		toolsone->retlen++;
+		tools->hash = 0;
 	}
 	lilo_no_width_hash_prec(tools);
 }
 
 void	lilx_hash_width_prec(t_conv *tools, t_convone *toolsone)
 {
-	if (WIDTH && !PREC)
-		WIDTH -= 2;
-	if (WIDTH && !PREC)
+	if (tools->width && !tools->prec)
+		tools->width -= 2;
+	if (tools->width && !tools->prec)
 		hash_width(tools, toolsone);
-	if (WIDTH != 0 && PREC != 0)
+	if (tools->width != 0 && tools->prec != 0)
 		hash_width_and_prec(tools, toolsone);
-	if (NNBR != 0 && ZERO != 0)
+	if (tools->nnbr != 0 && tools->zero != 0)
 		write(1, "0x", 2);
-	if ((WIDTH == 0 && PREC == 0) && (HASH == 1))
+	if ((tools->width == 0 && tools->prec == 0) && (tools->hash == 1))
 	{
 		write(1, "0x", 2);
-		RETLEN += 2;
+		toolsone->retlen += 2;
 	}
 }
 
 void	bigx_hash_width_prec(t_conv *tools, t_convone *toolsone)
 {
-	if (WIDTH && !PREC)
-		LEN += 2;
-	if (WIDTH && !PREC)
+	if (tools->width && !tools->prec)
+		tools->len += 2;
+	if (tools->width && !tools->prec)
 		hash_width(tools, toolsone);
-	if (WIDTH != 0 && PREC != 0)
+	if (tools->width != 0 && tools->prec != 0)
 		hash_width_and_prec(tools, toolsone);
 	write(1, "0X", 2);
-	RETLEN += 2;
+	toolsone->retlen += 2;
 }

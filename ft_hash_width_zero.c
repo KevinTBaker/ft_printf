@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:41:01 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/13 17:07:34 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/17 16:51:51 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_hash_width_zero_flag(t_conv *tools, t_convone *toolsone)
 {
 	write(1, "0x", 2);
-	RETLEN += 2;
-	while (WIDTH > LEN)
+	toolsone->retlen += 2;
+	while (tools->width > tools->len)
 	{
 		write(1, "0", 1);
-		WIDTH--;
-		RETLEN++;
+		tools->width--;
+		toolsone->retlen++;
 	}
-	ZERO = 0;
-	HASH = 0;
+	tools->zero = 0;
+	tools->hash = 0;
 }

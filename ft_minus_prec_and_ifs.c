@@ -14,84 +14,84 @@
 
 void	minus_prec_width_space_neg(t_conv *tools, t_convone *toolsone)
 {
-	if (NEG == 1 && PREC == 0)
+	if (tools->neg == 1 && tools->prec == 0)
 	{
 		ft_putchar('-');
-		NEG = 0;
-		LEN++;
+		tools->neg = 0;
+		tools->len++;
 	}
-	if (SPACE == 1)
+	if (tools->space == 1)
 	{
 		ft_putchar(' ');
-		WIDTH--;
-		SPACE = 0;
+		tools->width--;
+		tools->space = 0;
 	}
-	while (PREC > 0)
+	while (tools->prec > 0)
 	{
-		if (NEG == 1)
+		if (tools->neg == 1)
 		{
 			ft_putchar('-');
-			NEG = 0;
-			LEN++;
+			tools->neg = 0;
+			tools->len++;
 		}
 		write(1, "0", 1);
-		PREC--;
-		RETLEN++;
+		tools->prec--;
+		toolsone->retlen++;
 	}
 }
 
 void	minus_width_hash(t_conv *tools, t_convone *toolsone)
 {
 	write(1, "0", 1);
-	if (LILX == 1)
+	if (tools->lil_x == 1)
 	{
 		write(1, "x", 1);
-		WIDTH--;
-		RETLEN++;
+		tools->width--;
+		toolsone->retlen++;
 	}
-	else if (BIGX == 1)
+	else if (tools->big_x == 1)
 	{
 		write(1, "X", 1);
-		WIDTH--;
-		RETLEN++;
+		tools->width--;
+		toolsone->retlen++;
 	}
-	WIDTH--;
-	HASH = 0;
-	RETLEN++;
+	tools->width--;
+	tools->hash = 0;
+	toolsone->retlen++;
 }
 
 void	if_neg_or_plus(t_conv *tools, t_convone *toolsone)
 {
-	if (NEG == 1)
+	if (tools->neg == 1)
 	{
-		RETLEN++;
-		WIDTH--;
+		toolsone->retlen++;
+		tools->width--;
 	}
-	if (PLUS == 1)
+	if (tools->plus == 1)
 	{
-		WIDTH--;
-		RETLEN++;
+		tools->width--;
+		toolsone->retlen++;
 	}
 }
 
 void	if_plus_or_neg(t_conv *tools)
 {
-	if (PLUS == 1)
+	if (tools->plus == 1)
 	{
 		ft_putchar('+');
-		PLUS = 0;
+		tools->plus = 0;
 	}
-	if (NEG == 1)
+	if (tools->neg == 1)
 	{
 		ft_putchar('-');
-		NEG = 0;
+		tools->neg = 0;
 	}
-	WPLUS = 1;
+	tools->wplus = 1;
 }
 
 int		else_if_prec(t_conv *tools, int n, int len)
 {
-	n = PREC;
+	n = tools->prec;
 	while (n != 0)
 	{
 		n = n / 10;

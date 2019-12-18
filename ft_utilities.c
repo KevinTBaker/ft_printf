@@ -6,7 +6,7 @@
 /*   By: kbaker <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 20:30:33 by kbaker            #+#    #+#             */
-/*   Updated: 2019/12/16 19:35:47 by kbaker           ###   ########.fr       */
+/*   Updated: 2019/12/17 20:13:50 by kbaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,32 @@
 
 void		zeroing_convs(t_conv *tools)
 {
-	PERC = 0;
-	LILD = 0;
-	LILP = 0;
-	LILI = 0;
-	LILD = 0;
-	LILO = 0;
-	LILU = 0;
-	LILX = 0;
-	LILF = 0;
-	BIGX = 0;
-	LILC = 0;
+	tools->percent = 0;
+	tools->lil_d = 0;
+	tools->lil_p = 0;
+	tools->lil_i = 0;
+	tools->lil_d = 0;
+	tools->lil_o = 0;
+	tools->lil_u = 0;
+	tools->lil_x = 0;
+	tools->lil_f = 0;
+	tools->big_x = 0;
+	tools->lil_c = 0;
 }
 
 intmax_t	ft_turn_to_positive(t_conv *tools)
 {
-	if (MINUS == 1 && SPACE == 1)
+	if (tools->minus == 1 && tools->space == 1)
 	{
-		if (NBR < 0)
-			SPACE = 0;
+		if (tools->nbr < 0)
+			tools->space = 0;
 	}
-	if ((!WIDTH && !PREC) || (MINUS == 1 && PREC == 0))
-		return (NBR);
-	if (NBR < 0)
-		NEG = 1;
-	return (NBR * -1);
+	if ((!tools->width && !tools->prec) ||
+			(tools->minus == 1 && tools->prec == 0))
+		return (tools->nbr);
+	if (tools->nbr < 0)
+		tools->neg = 1;
+	return (tools->nbr * -1);
 }
 
 int			ft_len_of_pw(char *str, int i, t_conv *tools)
@@ -48,16 +49,16 @@ int			ft_len_of_pw(char *str, int i, t_conv *tools)
 
 	n = 0;
 	len = 0;
-	if (WIDTH && !PREC)
+	if (tools->width && !tools->prec)
 	{
-		n = WIDTH;
+		n = tools->width;
 		while (n != 0)
 		{
 			n = n / 10;
 			len++;
 		}
 	}
-	else if (PREC)
+	else if (tools->prec)
 		len = else_if_prec(tools, n, len);
 	if (str[i] == '0')
 		i++;
